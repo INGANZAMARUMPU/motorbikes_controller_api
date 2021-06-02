@@ -14,3 +14,8 @@ class TokenPairSerializer(TokenObtainPairSerializer):
 		data['id'] = self.user.id
 		data['fullname'] = self.user.first_name+" "+self.user.last_name
 		return data
+
+class PersonneSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Personne
+		fields = "__all__"

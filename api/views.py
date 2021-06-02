@@ -10,28 +10,36 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from django_filters import rest_framework as filters
 
-from .models import *
 from .serializers import *
 
-# class EpisodeFilter(filters.FilterSet):
-# 	class Meta:
-# 		model = Episode
-# 		fields = {
-# 			'subcategory': ['exact'],
-# 			'tag': ['exact'],
-# 			'id': ['lt', 'gt']
-# 		}
+class PersonneFilter(filters.FilterSet):
+	class Meta:
+		model = Personne
+		fields = {
+			"nom":['contains'],
+			"prenom":['contains'],
+			"profession":['contains'],
+			"province":['contains'],
+			"commune":['contains'],
+			"lieu_naissance":['contains'],
+			"date_naissance":['exact'],
+			"cni":['contains'],
+			"numero_permis":['exact'],
+			"residence":['contains'],
+			"autres":['contains'],
+		}
 
 SAFE_METHODS = ['GET', 'HEAD', 'OPTIONS']
 SAFE_EDIT_METHODS = ['PUT', 'PACTH', 'POST']
 
 class IsAdminOrReadOnly(BasePermission):
-    def has_permission(self, request, view):
-        if(request.user.is_superuser):
-            return True
-        elif(request.method in SAFE_METHODS and request.user):
-            return True
-        return False
+	def has_permission(self, request, view):
+		if(not request.user):
+			return False
+		if(request.user.is_superuser):
+			return True
+		if(request.method in SAFE_METHODS):
+			return True
 
 class IsAdminOrCreateUpdateOnly(BasePermission):
     def has_permission(self, request, view):
@@ -43,3 +51,10 @@ class IsAdminOrCreateUpdateOnly(BasePermission):
 
 class TokenPairView(TokenObtainPairView):
 	serializer_class = TokenPairSerializer
+
+class PersonneViewset(viewsets.ModelViewSet):
+	authentication_classes = (SessionAuthentication, JWTAuthentication)
+	permission_classes = [IsAdminOrReadOnly, ]
+	queryset = Personne.objects.all()
+	serializer_class = PersonneSerializer
+	filter_class = PersonneFilter
