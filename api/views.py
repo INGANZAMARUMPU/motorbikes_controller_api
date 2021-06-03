@@ -18,13 +18,16 @@ class PersonneFilter(filters.FilterSet):
 		fields = {
 			"nom":['contains'],
 			"prenom":['contains'],
-			"profession":['contains'],
+			"pere":['contains'],
+			"mere":['contains'],
 			"province":['contains'],
 			"commune":['contains'],
-			"lieu_naissance":['contains'],
-			"date_naissance":['exact'],
+			"colline":['contains'],
+			"date_naissance":['contains'],
 			"cni":['contains'],
-			"numero_permis":['exact'],
+			"etat_civil":['contains'],
+			"telephone":['contains'],
+			"parking":['contains'],
 			"residence":['contains'],
 			"autres":['contains'],
 		}
@@ -57,4 +60,7 @@ class PersonneViewset(viewsets.ModelViewSet):
 	permission_classes = [IsAdminOrReadOnly, ]
 	queryset = Personne.objects.all()
 	serializer_class = PersonneSerializer
-	filter_class = PersonneFilter
+	# filter_class = PersonneFilter
+	filter_fields = "nom", "prenom", "pere", "mere", "province",\
+		"commune", "colline", "date_naissance", "cni", "etat_civil",\
+		"telephone", "parking", "residence", "autres"
