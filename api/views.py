@@ -1,3 +1,4 @@
+from rest_framework.filters import SearchFilter
 from rest_framework import viewsets, generics, mixins
 from rest_framework.response import Response
 from rest_framework.decorators import action, api_view
@@ -60,7 +61,6 @@ class PersonneViewset(viewsets.ModelViewSet):
 	permission_classes = [IsAdminOrReadOnly, ]
 	queryset = Personne.objects.all()
 	serializer_class = PersonneSerializer
-	# filter_class = PersonneFilter
-	filter_fields = "nom", "prenom", "pere", "mere", "province",\
-		"commune", "colline", "date_naissance", "cni", "etat_civil",\
-		"telephone", "parking", "residence", "autres"
+	# filter_class = PersonneFilter,
+	filter_backends = SearchFilter,
+	search_fields = "nom", "prenom", "pere", "mere", "colline", "cni", "telephone", "parking", "residence", "autres"
