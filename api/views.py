@@ -63,4 +63,4 @@ class PersonneViewset(viewsets.ModelViewSet):
 	serializer_class = PersonneSerializer
 	# filter_class = PersonneFilter,
 	filter_backends = SearchFilter,
-	search_fields = "nom", "prenom", "pere", "mere", "colline", "cni", "telephone", "parking", "residence", "autres"
+	search_fields = "nom", "prenom", "cni", "telephone", "parking", "residence", "autres", "no_permi", "no_badge"

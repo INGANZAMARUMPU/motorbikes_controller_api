@@ -10,6 +10,8 @@ class Personne(models.Model):
 	colline = models.CharField(max_length=32)
 	date_naissance = models.DateField()
 	cni = models.CharField(max_length=32)
+	no_permi = models.CharField(max_length=32, blank=True, null=True)
+	no_badge = models.CharField(max_length=16, blank=True, null=True)
 	etat_civil = models.CharField(max_length=32)
 	telephone = models.CharField(max_length=32, unique=True)
 	parking = models.CharField(max_length=32)

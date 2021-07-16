@@ -4,22 +4,19 @@ from .models import *
 @admin.register(Personne)
 class PersonneAdmin(admin.ModelAdmin):
 	list_display = (
-		"nom", "prenom", "pere", "mere", "province", "commune",\
-		"colline", "date_naissance", "cni", "etat_civil", "telephone",\
-		"parking", "residence", "photo_1", "photo_2", "autres"
+		"nom", "prenom", "date_naissance", "cni", "no_permi", "no_badge",
+		"etat_civil", "telephone", "parking", "residence", "photo_1",
+		"photo_2",
 	)
 	list_filter = (
-		"nom", "prenom", "pere", "mere", "province", "commune",\
-		"colline", "date_naissance", "cni", "etat_civil",\
-		"telephone", "parking", "residence", "autres"
+		"nom", "prenom","date_naissance", "cni", "no_permi", "no_badge",
+		"etat_civil", "parking", "residence"
 	)
 	search_field = (
-		"nom", "prenom", "pere", "mere", "province","commune",\
-		"colline", "date_naissance", "cni", "etat_civil",
-		"telephone", "parking", "residence", "autres"
+		"nom", "prenom", "cni", "no_permi", "no_badge",
+		"etat_civil", "telephone", "parking", "residence", "autres"
 	)
 	ordering = (
-		"nom", "prenom", "pere", "mere", "province", "commune",\
-		"colline", "date_naissance", "cni", "etat_civil", \
-		"telephone", "parking", "residence", "autres"
+		"nom", "prenom", "province", "commune", "colline", "date_naissance",
+		"no_badge", "etat_civil", "parking", "residence",
 	)
